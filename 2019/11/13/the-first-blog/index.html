@@ -12,7 +12,7 @@
 
 
 
-<title>Hello World | Leo Liu</title>
+<title>the first blog | Leo Liu</title>
 
 
 
@@ -109,73 +109,11 @@
             <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
-
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">the first blog</h1>
             
                 <div class="post-meta">
                     
@@ -184,7 +122,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">November 13, 2019&nbsp;&nbsp;11:35:02</a>
+                        Date: <a href="#">November 13, 2019&nbsp;&nbsp;16:59:24</a>
                         </span>
                     
                     
@@ -193,19 +131,82 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <p>`<br>public class Connect{</p>
+<pre><code>private java.sql.Connection  con = null;
+//官方代码有microsoft，但加了会报“No suitable driver found for jdbc:microsoft:sqlserver://...&quot;,各位根据自己项目加减
+//private final String url = &quot;jdbc:microsoft:sqlserver://&quot;;
+private final String url = &quot;jdbc:sqlserver://&quot;;
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+// Informs the driver to use server a side-cursor,
+// which permits more than one active statement
+// on a connection.
+private final String selectMethod = &quot;cursor&quot;;
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+// Constructor
+public Connect(){}
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+private String getConnectionUrl(){
+    return url+serverName+&quot;:&quot;+portNumber+&quot;;databaseName=&quot;+databaseName+&quot;;selectMethod=&quot;+selectMethod+&quot;;&quot;;
+}
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+private java.sql.Connection getConnection(){
+    try{
+        Class.forName(&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;);
+        con = java.sql.DriverManager.getConnection(getConnectionUrl(),userName,password);
+        if(con!=null) System.out.println(&quot;Connection Successful!&quot;);
+    }catch(Exception e){
+        e.printStackTrace();
+        System.out.println(&quot;Error Trace in getConnection() : &quot; + e.getMessage());
+    }
+    return con;
+}
+
+ /*
+      Display the driver properties, database details
+ */
+//这是一首简单的歌
+public void displayDbProperties(){
+    java.sql.DatabaseMetaData dm = null;
+    java.sql.ResultSet rs = null;
+    try{
+        con= this.getConnection();
+        if(con!=null){
+            dm = con.getMetaData();
+            System.out.println(&quot;Driver Information&quot;);
+            System.out.println(&quot;\tDriver Name: &quot;+ dm.getDriverName());
+            System.out.println(&quot;\tDriver Version: &quot;+ dm.getDriverVersion ());
+            System.out.println(&quot;\nDatabase Information &quot;);
+            System.out.println(&quot;\tDatabase Name: &quot;+ dm.getDatabaseProductName());
+            System.out.println(&quot;\tDatabase Version: &quot;+ dm.getDatabaseProductVersion());
+            System.out.println(&quot;Avalilable Catalogs &quot;);
+            rs = dm.getCatalogs();
+            while(rs.next()){
+                System.out.println(&quot;\tcatalog: &quot;+ rs.getString(1));
+            }
+            rs.close();
+            rs = null;
+            closeConnection();
+        }else System.out.println(&quot;Error: No active Connection&quot;);
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+    dm=null;
+}
+
+private void closeConnection(){
+    try{
+        if(con!=null)
+            con.close();
+        con=null;
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+}
+public static void main(String[] args) throws Exception
+{
+    Connect myDbTest = new Connect();
+    myDbTest.displayDbProperties();
+}</code></pre><p>}<br>`</p>
 
         </div>
 
@@ -220,7 +221,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/11/13/hello-world/">http://yoursite.com/2019/11/13/hello-world/</a></span>
+                        <span><a href="http://yoursite.com/2019/11/13/the-first-blog/">http://yoursite.com/2019/11/13/the-first-blog/</a></span>
                     </p>
                 
                 
@@ -253,8 +254,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/11/13/the-first-blog/">the first blog</a>
             
+            <a class="next" rel="next" href="/2019/11/13/hello-world/">Hello World</a>
             
         </section>
 
