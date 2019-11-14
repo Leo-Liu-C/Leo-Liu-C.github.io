@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://leo-liu-c.github.io/"/>
   <updated>2019-11-13T03:35:02.827Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://leo-liu-c.github.io/</id>
   
   <author>
     <name>Leo Liu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2019/11/13/hello-world/"/>
-    <id>http://yoursite.com/2019/11/13/hello-world/</id>
+    <link href="http://leo-liu-c.github.io/2019/11/13/hello-world/"/>
+    <id>http://leo-liu-c.github.io/2019/11/13/hello-world/</id>
     <published>2019-11-13T03:35:02.825Z</published>
     <updated>2019-11-13T03:35:02.827Z</updated>
     
