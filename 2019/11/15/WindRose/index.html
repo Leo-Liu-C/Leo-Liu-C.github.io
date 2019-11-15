@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Leo Liu">
+
+
+
+
+
+<title>WindRose | Leo Liu</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<link rel="alternate" href="/atom.xml" title="Leo Liu" type="application/atom+xml">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Leo Liu&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Leo Liu&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">WindRose</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Leo Liu</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">November 15, 2019&nbsp;&nbsp;17:49:18</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>java依赖jfreechart绘制风速风向玫瑰图 :  运用jfreechart绘制蜘蛛雷达图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line">jfreechart依赖</span><br><span class="line">&lt;!--echarts--&gt;</span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/jfree/jcommon --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;jfree&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jcommon&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- https://mvnrepository.com/artifact/org.jfree/jfreechart --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.jfree&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jfreechart&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0.19&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import org.jfree.chart.ChartPanel;</span><br><span class="line">import org.jfree.chart.ChartUtilities;</span><br><span class="line">import org.jfree.chart.JFreeChart;</span><br><span class="line">import org.jfree.chart.plot.SpiderWebPlot;</span><br><span class="line">import org.jfree.chart.title.LegendTitle;</span><br><span class="line">import org.jfree.chart.title.TextTitle;</span><br><span class="line">import org.jfree.data.category.DefaultCategoryDataset;</span><br><span class="line">import org.jfree.ui.RectangleEdge;</span><br><span class="line"></span><br><span class="line">import javax.swing.*;</span><br><span class="line">import java.awt.*;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class WindRoseImgChart &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">//        new MySpriderWebPlotTest().windRose(&quot;2019-11-06&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void windRose(String datetime, float[] winds, float[] windf) &#123;</span><br><span class="line">        JFrame jf = new JFrame();</span><br><span class="line">        jf.add(erstelleSpinnenDiagramm(datetime, winds, windf));</span><br><span class="line">        jf.pack();</span><br><span class="line">        jf.setVisible(false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static JPanel erstelleSpinnenDiagramm(String datetime, float[] winds, float[] windf) &#123;</span><br><span class="line"></span><br><span class="line">        DefaultCategoryDataset dataset = new DefaultCategoryDataset();</span><br><span class="line">        String group1 = &quot;风速 单位:m/s&quot;;</span><br><span class="line">        dataset.addValue(winds[0], group1, &quot;N&quot;);</span><br><span class="line">        dataset.addValue(winds[1], group1, &quot;NNE&quot;);</span><br><span class="line">        dataset.addValue(winds[2], group1, &quot;NE&quot;);</span><br><span class="line">        dataset.addValue(winds[3], group1, &quot;EEN&quot;);</span><br><span class="line">        dataset.addValue(winds[4], group1, &quot;E&quot;);</span><br><span class="line">        dataset.addValue(winds[5], group1, &quot;EES&quot;);</span><br><span class="line">        dataset.addValue(winds[6], group1, &quot;ES&quot;);</span><br><span class="line">        dataset.addValue(winds[7], group1, &quot;SSE&quot;);</span><br><span class="line">        dataset.addValue(winds[8], group1, &quot;S&quot;);</span><br><span class="line">        dataset.addValue(winds[9], group1, &quot;SSW&quot;);</span><br><span class="line">        dataset.addValue(winds[10], group1, &quot;SW&quot;);</span><br><span class="line">        dataset.addValue(winds[11], group1, &quot;WWS&quot;);</span><br><span class="line">        dataset.addValue(winds[12], group1, &quot;W&quot;);</span><br><span class="line">        dataset.addValue(winds[13], group1, &quot;WWN&quot;);</span><br><span class="line">        dataset.addValue(winds[14], group1, &quot;WN&quot;);</span><br><span class="line">        dataset.addValue(winds[15], group1, &quot;NNW&quot;);</span><br><span class="line">        String group3 = &quot;风向风频 单位:*10&quot;;</span><br><span class="line">        dataset.addValue(windf[0], group3, &quot;N&quot;);</span><br><span class="line">        dataset.addValue(windf[1], group3, &quot;NNE&quot;);</span><br><span class="line">        dataset.addValue(windf[2], group3, &quot;NE&quot;);</span><br><span class="line">        dataset.addValue(windf[3], group3, &quot;EEN&quot;);</span><br><span class="line">        dataset.addValue(windf[4], group3, &quot;E&quot;);</span><br><span class="line">        dataset.addValue(windf[5], group3, &quot;EES&quot;);</span><br><span class="line">        dataset.addValue(windf[6], group3, &quot;ES&quot;);</span><br><span class="line">        dataset.addValue(windf[7], group3, &quot;SSE&quot;);</span><br><span class="line">        dataset.addValue(windf[8], group3, &quot;S&quot;);</span><br><span class="line">        dataset.addValue(windf[9], group3, &quot;SSW&quot;);</span><br><span class="line">        dataset.addValue(windf[10], group3, &quot;SW&quot;);</span><br><span class="line">        dataset.addValue(windf[11], group3, &quot;WWS&quot;);</span><br><span class="line">        dataset.addValue(windf[12], group3, &quot;W&quot;);</span><br><span class="line">        dataset.addValue(windf[13], group3, &quot;WWN&quot;);</span><br><span class="line">        dataset.addValue(windf[14], group3, &quot;WN&quot;);</span><br><span class="line">        dataset.addValue(windf[15], group3, &quot;NNW&quot;);</span><br><span class="line"></span><br><span class="line">        Arrays.sort(windf);</span><br><span class="line">        Arrays.sort(winds);</span><br><span class="line">        float num = windf[15] &gt; winds[15] ? windf[15] : winds[15];</span><br><span class="line">        String group2 = &quot;&quot;;</span><br><span class="line">        dataset.addValue(num, group2, &quot;N&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;NNE&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;NE&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;EEN&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;E&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;EES&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;ES&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;SSE&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;S&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;SSW&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;SW&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;WWS&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;W&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;WWN&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;WN&quot;);</span><br><span class="line">        dataset.addValue(num, group2, &quot;NNW&quot;);</span><br><span class="line">        //带刻度雷达图</span><br><span class="line">        MySpiderWebPlot spiderwebplot = new MySpiderWebPlot(dataset);</span><br><span class="line">        //不带刻度</span><br><span class="line">		// SpiderWebPlot spiderwebplot = new SpiderWebPlot(dataset);</span><br><span class="line">        JFreeChart jfreechart = new JFreeChart(&quot;风速风向玫瑰图&quot;, TextTitle.DEFAULT_FONT, spiderwebplot, false);</span><br><span class="line">        //设置线条颜色 索引从0开始</span><br><span class="line">        spiderwebplot.setSeriesPaint(0, Color.red);</span><br><span class="line">        spiderwebplot.setSeriesPaint(1, Color.blue);</span><br><span class="line">        spiderwebplot.setSeriesPaint(2, Color.black);</span><br><span class="line">        LegendTitle legendtitle = new LegendTitle(spiderwebplot);</span><br><span class="line">        legendtitle.setPosition(RectangleEdge.BOTTOM);</span><br><span class="line">//        legendtitle.set</span><br><span class="line">        jfreechart.addSubtitle(legendtitle);</span><br><span class="line">        try &#123;</span><br><span class="line">            saveAsFile(jfreechart, datetime, &quot;bd&quot;, 1000, 500);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        // 6:使用chartPanel接收</span><br><span class="line"></span><br><span class="line">        ChartPanel chartpanel = new ChartPanel(jfreechart);</span><br><span class="line">        return chartpanel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 保存文件</span><br><span class="line">     *</span><br><span class="line">     * @param chart</span><br><span class="line">     * @param datetime</span><br><span class="line">     * @param weight</span><br><span class="line">     * @param height</span><br><span class="line">     * @throws Exception</span><br><span class="line">     */</span><br><span class="line">    public static void saveAsFile(JFreeChart chart, String datetime, String bridge,</span><br><span class="line">                                  int weight, int height) throws Exception &#123;</span><br><span class="line">        String outputPath = &quot;c:\\img\\&quot; + datetime + &quot;-&quot; + bridge + &quot;-windrose.png&quot;;</span><br><span class="line">        FileOutputStream out = null;</span><br><span class="line">        File outFile = new File(outputPath);</span><br><span class="line">        if (!outFile.getParentFile().exists()) &#123;</span><br><span class="line">            outFile.getParentFile().mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        out = new FileOutputStream(outputPath);</span><br><span class="line">        // 保存为PNG</span><br><span class="line">        ChartUtilities.writeChartAsPNG(out, chart, weight, height);</span><br><span class="line">        // 保存为JPEG</span><br><span class="line">//         ChartUtilities.writeChartAsJPEG(out, chart, weight, height);</span><br><span class="line">        out.flush();</span><br><span class="line">        if (out != null) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125; catch (IOException e) &#123;</span><br><span class="line">                // do nothing</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将雷达图标出刻度,以最大值为最长刻度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">package cn.jeefast.scheduled.utils.createimg;</span><br><span class="line"></span><br><span class="line">import org.jfree.chart.plot.SpiderWebPlot;</span><br><span class="line">import org.jfree.data.category.CategoryDataset;</span><br><span class="line"></span><br><span class="line">import java.awt.*;</span><br><span class="line">import java.awt.font.FontRenderContext;</span><br><span class="line">import java.awt.font.LineMetrics;</span><br><span class="line">import java.awt.geom.*;</span><br><span class="line">import java.text.NumberFormat;</span><br><span class="line"></span><br><span class="line">public class MySpiderWebPlot extends SpiderWebPlot &#123;</span><br><span class="line">    private int ticks = DEFAULT_TICKS;</span><br><span class="line">    private static final int DEFAULT_TICKS = 5;</span><br><span class="line">    private NumberFormat format = NumberFormat.getInstance();</span><br><span class="line">    private static final double PERPENDICULAR = 90;</span><br><span class="line">    private static final double TICK_SCALE = 0.015;</span><br><span class="line">    private int valueLabelGap = DEFAULT_GAP;</span><br><span class="line">    private static final int DEFAULT_GAP = 10;</span><br><span class="line">    private static final double THRESHOLD = 15;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    MySpiderWebPlot(CategoryDataset createCategoryDataset) &#123;</span><br><span class="line">        super(createCategoryDataset);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void drawLabel(final Graphics2D g2, final Rectangle2D plotArea, final double value,</span><br><span class="line">                             final int cat, final double startAngle, final double extent) &#123;</span><br><span class="line">        super.drawLabel(g2, plotArea, value, cat, startAngle, extent);</span><br><span class="line">        final FontRenderContext frc = g2.getFontRenderContext();</span><br><span class="line">        final double[] transformed = new double[2];</span><br><span class="line">        final double[] transformer = new double[2];</span><br><span class="line">        final Arc2D arc1 = new Arc2D.Double(plotArea, startAngle, 0, Arc2D.OPEN);</span><br><span class="line">        for (int i = 1; i &lt;= ticks; i++) &#123;</span><br><span class="line">            final Point2D point1 = arc1.getEndPoint();</span><br><span class="line">            final double deltaX = plotArea.getCenterX();</span><br><span class="line">            final double deltaY = plotArea.getCenterY();</span><br><span class="line">            double labelX = point1.getX() - deltaX;</span><br><span class="line">            double labelY = point1.getY() - deltaY;</span><br><span class="line">            final double scale = ((double) i / (double) ticks);</span><br><span class="line">            final AffineTransform tx = AffineTransform.getScaleInstance(scale, scale);</span><br><span class="line">            final AffineTransform pointTrans = AffineTransform.getScaleInstance(scale + TICK_SCALE, scale + TICK_SCALE);</span><br><span class="line">            transformer[0] = labelX;</span><br><span class="line">            transformer[1] = labelY;</span><br><span class="line">            pointTrans.transform(transformer, 0, transformed, 0, 1);</span><br><span class="line">            final double pointX = transformed[0] + deltaX;</span><br><span class="line">            final double pointY = transformed[1] + deltaY;</span><br><span class="line">            tx.transform(transformer, 0, transformed, 0, 1);</span><br><span class="line">            labelX = transformed[0] + deltaX;</span><br><span class="line">            labelY = transformed[1] + deltaY;</span><br><span class="line">            double rotated = (PERPENDICULAR);</span><br><span class="line">            AffineTransform rotateTrans = AffineTransform.getRotateInstance(Math.toRadians(rotated), labelX, labelY);</span><br><span class="line">            transformer[0] = pointX;</span><br><span class="line">            transformer[1] = pointY;</span><br><span class="line">            rotateTrans.transform(transformer, 0, transformed, 0, 1);</span><br><span class="line">            final double x1 = transformed[0];</span><br><span class="line">            final double y1 = transformed[1];</span><br><span class="line">            rotated = (-PERPENDICULAR);</span><br><span class="line">            rotateTrans = AffineTransform.getRotateInstance(Math.toRadians(rotated), labelX, labelY);</span><br><span class="line">            rotateTrans.transform(transformer, 0, transformed, 0, 1);</span><br><span class="line">            final Composite saveComposite = g2.getComposite();</span><br><span class="line">            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));</span><br><span class="line">            g2.draw(new Line2D.Double(transformed[0], transformed[1], x1, y1));</span><br><span class="line">            if (startAngle == this.getStartAngle()) &#123;</span><br><span class="line">                final String label = format.format(((double) i / (double) ticks) * this.getMaxValue());</span><br><span class="line">                final Rectangle2D labelBounds = getLabelFont().getStringBounds(label, frc);</span><br><span class="line">                final LineMetrics lm = getLabelFont().getLineMetrics(label, frc);</span><br><span class="line">                final double ascent = lm.getAscent();</span><br><span class="line">                if (Math.abs(labelX - plotArea.getCenterX()) &lt; THRESHOLD) &#123;</span><br><span class="line">                    labelX += valueLabelGap;</span><br><span class="line">                    labelY += ascent / (float) 2;</span><br><span class="line">                &#125; else if (Math.abs(labelY - plotArea.getCenterY()) &lt; THRESHOLD) &#123;</span><br><span class="line">                    labelY += valueLabelGap;</span><br><span class="line">                &#125; else if (labelX &gt;= plotArea.getCenterX()) &#123;</span><br><span class="line">                    if (labelY &lt; plotArea.getCenterY()) &#123;</span><br><span class="line">                        labelX += valueLabelGap;</span><br><span class="line">                        labelY += valueLabelGap;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        labelX -= valueLabelGap;</span><br><span class="line">                        labelY += valueLabelGap;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    if (labelY &gt; plotArea.getCenterY()) &#123;</span><br><span class="line">                        labelX -= valueLabelGap;</span><br><span class="line">                        labelY -= valueLabelGap;</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        labelX += valueLabelGap;</span><br><span class="line">                        labelY -= valueLabelGap;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                g2.setPaint(getLabelPaint());</span><br><span class="line">                g2.setFont(getLabelFont());</span><br><span class="line">                g2.drawString(label, (float) labelX, (float) labelY);</span><br><span class="line">            &#125;</span><br><span class="line">            g2.setComposite(saveComposite);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Leo Liu</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://leo-liu-c.github.io/2019/11/15/WindRose/">http://leo-liu-c.github.io/2019/11/15/WindRose/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY<strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();" target="_blank" rel="noopener">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/11/15/Untitled/">springboot打包将配置文件和lib分开</a>
+            
+            
+            <a class="next" rel="next" href="/2019/11/15/word%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/">word插入图片</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Leo Liu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
